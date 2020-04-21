@@ -112,23 +112,32 @@ console.log(getAllWinners(fifaData))
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
+const winnersInitials = getFinals.map(function(x){
+    if (x["Home Team Goals"] > x["Away Team Goals"]){
+        return x["Home Team Initials"]; 
+    } else if (x["Home Team Goals"] < x["Away Team Goals"]){
+        return x["Away Team Initials"]; 
+    }
+})
 
-// use getWinners and translate that to make an array with the initials of the winning teams of each year, 
-// loop through that array and add a count (to a variable) for every time teamInitials shows up (use reduce)
-
-
-// function getCountryWins(data, teamInitials) {
-//     const winnersInitials = []
-//     let count; 
+function getCountryWins(data, teamInitials) {
     
-//     if (data["Home Team Initials"] === teamInitials){
-//     winnersInitials.reduce((total, x) => {
-//         return total += x;
-//       }, 0);
-      
-// };
+    const arrayOfWins = data.filter(function(x){
+        if (x === teamInitials){
+            return x 
+        }
+    })
+    return arrayOfWins.length   
+};
 
-// getCountryWins();
+console.log(getCountryWins(winnersInitials, 'ARG'));
+
+// let arrayOfWins = data.reduce(function(acc, x){
+//     if (x === teamInitials){
+//         return acc += 1 
+//     }
+// }, 0)
+
 
 
 /* Task 8: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
